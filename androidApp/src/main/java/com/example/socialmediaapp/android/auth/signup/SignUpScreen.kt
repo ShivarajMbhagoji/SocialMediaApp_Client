@@ -2,10 +2,12 @@ package com.example.socialmediaapp.android.auth.signup
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.CustomTextField
+import com.example.socialmediaapp.android.common.theme.SmallSpacing
 
 @Composable
 fun SignUpScreen(
@@ -102,7 +105,9 @@ fun SignUpScreen(
                 Text(text = stringResource(id = R.string.signup_button_hint))
             }
 
-
+            GoToLogin(modifier) {
+                onNavigateToLogin()
+            }
 
         }
 
@@ -124,6 +129,26 @@ fun SignUpScreen(
             }
         }
     )
+}
+
+@Composable
+fun GoToLogin(
+    modifier: Modifier = Modifier,
+    onNavigateToLogin: () -> Unit
+) {
+    Row(
+        modifier = modifier, horizontalArrangement = Arrangement.spacedBy(
+            SmallSpacing
+        )
+    ) {
+        Text(text = "Have already an account?", style = MaterialTheme.typography.caption)
+        Text(
+            text = "Login",
+            style = MaterialTheme.typography.caption,
+            color = MaterialTheme.colors.primary,
+            modifier = modifier.clickable { onNavigateToLogin() }
+        )
+    }
 }
 
 @Preview

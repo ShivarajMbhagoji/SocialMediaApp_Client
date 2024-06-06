@@ -5,6 +5,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
+import com.ramcosta.composedestinations.generated.destinations.SignUpDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.koinViewModel
 
@@ -20,10 +21,18 @@ fun SignUp(
         onEmailChange = viewModel::updateEmail,
         onPasswordChange = viewModel::updatePassword,
         onNavigateToLogin = {
-            navigator.navigate(LoginDestination)
+            navigator.navigate(LoginDestination){
+                popUpTo(SignUpDestination.invoke()){
+                    inclusive=true
+                }
+            }
         },
         onNavigateToHome = {
-                           navigator.navigate(HomeScreenDestination)
+                           navigator.navigate(HomeScreenDestination){
+                               popUpTo(SignUpDestination.invoke()){
+                                   inclusive=true
+                               }
+                           }
         },
         onSignUpClick = viewModel::signUp
     )

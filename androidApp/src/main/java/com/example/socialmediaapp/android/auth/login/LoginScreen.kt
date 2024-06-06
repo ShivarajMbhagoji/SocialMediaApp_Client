@@ -2,10 +2,12 @@ package com.example.socialmediaapp.android.auth.login
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.CustomTextField
+import com.example.socialmediaapp.android.common.theme.SmallSpacing
 
 @Composable
 fun LoginScreen(
@@ -37,7 +40,8 @@ fun LoginScreen(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onNavigateToHome: () -> Unit,
-    onSignInClick: () -> Unit
+    onSignInClick: () -> Unit,
+    onNavigateToSignup: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -91,6 +95,10 @@ fun LoginScreen(
             ){
                 Text(text = stringResource(id = R.string.login_button_label))
             }
+
+            GoToSignup(modifier) {
+                onNavigateToSignup()
+            }
         }
 
         if (uiState.isAuthenticating) {
@@ -114,6 +122,26 @@ fun LoginScreen(
 
 }
 
+@Composable
+fun GoToSignup(
+    modifier: Modifier = Modifier,
+    onNavigateToSignup: () -> Unit
+) {
+    Row(
+        modifier = modifier, horizontalArrangement = Arrangement.spacedBy(
+            SmallSpacing
+        )
+    ) {
+        Text(text = "Don't have an account?", style = MaterialTheme.typography.caption)
+        Text(
+            text = "SignUp",
+            style = MaterialTheme.typography.caption,
+            color = MaterialTheme.colors.primary,
+            modifier = modifier.clickable { onNavigateToSignup() }
+        )
+    }
+}
+
 @Preview
 @Composable
 fun LoginScreenPreview() {
@@ -123,7 +151,8 @@ fun LoginScreenPreview() {
             onEmailChange = {},
             onPasswordChange = {},
             onNavigateToHome={},
-            onSignInClick={}
+            onSignInClick={},
+            onNavigateToSignup = {}
         )
     }
 }
