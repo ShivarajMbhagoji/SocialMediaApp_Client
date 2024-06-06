@@ -3,10 +3,11 @@ package com.example.socialmediaapp.android.auth.login
 import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.koinViewModel
 
-@Destination<RootGraph>
+@Destination<RootGraph>(start=true)
 @Composable
 fun Login(
     navigator: DestinationsNavigator
@@ -15,6 +16,10 @@ fun Login(
     LoginScreen(
         uiState = viewModel.uiState,
         onEmailChange = viewModel::updateEmail,
-        onPasswordChange = viewModel::updatePassword
+        onPasswordChange = viewModel::updatePassword,
+        onSignInClick = viewModel::signIn,
+        onNavigateToHome = {
+            navigator.navigate(HomeScreenDestination)
+        }
     )
 }

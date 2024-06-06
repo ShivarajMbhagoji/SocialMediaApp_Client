@@ -8,7 +8,7 @@ import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.koinViewModel
 
-@Destination<RootGraph>(start=true)
+@Destination<RootGraph>
 @Composable
 fun SignUp(
     navigator: DestinationsNavigator
