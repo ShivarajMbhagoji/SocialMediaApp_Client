@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
 
     //Kotlinx Serialization
-    kotlin("plugin.serialization") version "1.9.10"
+    kotlin("plugin.serialization") version "1.9.20"
 }
 
 kotlin {
@@ -45,7 +45,7 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation("io.ktor:ktor-client-android:2.3.11")
+            implementation(libs.ktor.client.android)
             api("io.insert-koin:koin-android:3.3.1")
         }
 
@@ -65,12 +65,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-}
-dependencies {
-    implementation(libs.firebase.crashlytics.buildtools)
-    implementation(project(":shared"))
-    implementation(project(":shared"))
-    implementation(project(":shared"))
 }
 
 

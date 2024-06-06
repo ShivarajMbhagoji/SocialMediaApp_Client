@@ -6,7 +6,8 @@ import com.example.socialmediaapp.auth.data.AuthService
 import com.example.socialmediaapp.auth.domain.repository.AuthRepository
 import com.example.socialmediaapp.auth.domain.usecases.SignInUseCase
 import com.example.socialmediaapp.auth.domain.usecases.SignUpUseCase
-import com.example.socialmediaapp.common.util.provideDispatcher
+import com.example.socialmediaapp.provideDispatcher
+
 import org.koin.dsl.module
 
 private val authModule = module {
