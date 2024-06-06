@@ -35,10 +35,10 @@ kotlin {
             implementation(libs.ktor.client.core)
 
             implementation("io.ktor:ktor-client-content-negotiation:2.3.11")
-            implementation(libs.kotlinx.coroutines.core)
-            api(libs.ktor.serialization.kotlinx.json)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+            api("io.ktor:ktor-serialization-kotlinx-json:2.3.11")
 
-            api(libs.koin.core)
+            api("io.insert-koin:koin-core:3.4.1")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -46,7 +46,7 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
-            api("io.insert-koin:koin-android:3.3.1")
+            api("io.insert-koin:koin-android:3.4.1")
         }
 
         iosMain.dependencies {

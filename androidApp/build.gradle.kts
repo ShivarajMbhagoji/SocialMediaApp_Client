@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
-    id("com.google.devtools.ksp") version "1.9.22-1.0.17"
-    kotlin("plugin.serialization") version "1.9.10"
+    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
+    //Kotlinx Serialization
+    kotlin("plugin.serialization") version "1.9.20"
 
 
 }
@@ -63,25 +64,20 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.7.2")
 
 //    compose destination
-    implementation(libs.core.v210beta02)
-    ksp(libs.ksp.v210beta02)
+    implementation("io.github.raamcosta.compose-destinations:core:2.1.0-beta09")
+    ksp("io.github.raamcosta.compose-destinations:ksp:2.1.0-beta09")
 
-//    splashScreen
-    implementation(libs.androidx.core.splashscreen)
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
-    implementation(libs.androidx.datastore.preferences)
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 
-    implementation(libs.koin.androidx.compose.v340)
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.1")
 
-    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
 
-    implementation(libs.accompanist.systemuicontroller)
-
-    implementation(libs.coil.compose)
-
-//ktor
-//    implementation(libs.ktor.client.okhttp)
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
 //    coroutines
     implementation(libs.kotlinx.coroutines.android)
