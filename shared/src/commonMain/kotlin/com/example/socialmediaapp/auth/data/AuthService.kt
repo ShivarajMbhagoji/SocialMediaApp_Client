@@ -8,7 +8,7 @@ import io.ktor.client.request.setBody
 internal class AuthService: KtorApi(){
 
     suspend fun signUp(request: SignUpRequest):AuthResponse=client.post{
-        endPoint("/signup")
+        endPoint(path = "signup")
         setBody(request)
     }.body()
 

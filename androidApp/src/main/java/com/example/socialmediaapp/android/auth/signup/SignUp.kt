@@ -3,6 +3,8 @@ package com.example.socialmediaapp.android.auth.signup
 import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
+import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,9 +20,11 @@ fun SignUp(
         onEmailChange = viewModel::updateEmail,
         onPasswordChange = viewModel::updatePassword,
         onNavigateToLogin = {
-
+            navigator.navigate(LoginDestination)
         },
-        onNavigateToHome = {},
-        onSignUpClick = {}
+        onNavigateToHome = {
+                           navigator.navigate(HomeScreenDestination)
+        },
+        onSignUpClick = viewModel::signUp
     )
 }
