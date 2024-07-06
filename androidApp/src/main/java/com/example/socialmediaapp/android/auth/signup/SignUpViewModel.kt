@@ -3,8 +3,11 @@ package com.example.socialmediaapp.android.auth.signup
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.socialmediaapp.android.common.datastore.UserSettings
+import com.example.socialmediaapp.android.common.datastore.toUserSettings
 import com.example.socialmediaapp.auth.domain.usecases.SignUpUseCase
 import com.example.socialmediaapp.common.util.Result
 import kotlinx.coroutines.launch
@@ -12,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class SignUpViewModel(
     private val signUpUseCase: SignUpUseCase,
-//    private val dataStore: DataStore<UserPreferences>
+    private val dataStore: DataStore<UserSettings>
 ): ViewModel() {
     var uiState by mutableStateOf(SignUpUiState())
         private set
@@ -32,6 +35,9 @@ class SignUpViewModel(
                     )
                 }
                 is Result.Success -> {
+                    dataStore.updateData {
+                        authResultData.data!!.toUserSettings()
+                    }
                     uiState.copy(
                         isAuthenticating = false,
                         authenticationSucceed = true

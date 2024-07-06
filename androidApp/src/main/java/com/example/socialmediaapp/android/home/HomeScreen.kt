@@ -9,11 +9,10 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 
 @Composable
-@Destination<RootGraph>
+@Destination<RootGraph>(start=true)
 fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
-
     Box(
         modifier = modifier.fillMaxSize()
     ) {
