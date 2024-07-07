@@ -16,6 +16,7 @@ import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.theme.SmallElevation
 import com.ramcosta.composedestinations.generated.destinations.HomeDestination
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
+import com.ramcosta.composedestinations.generated.destinations.PostDetailDestination
 import com.ramcosta.composedestinations.generated.destinations.SignUpDestination
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
@@ -48,7 +49,7 @@ fun AppBar(
             },
             navigationIcon = if (shouldShowNavigationIcon(currentDestination?.route)) {
                 {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navHostController.navigateUp() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.round_arrow_back),
                             contentDescription = null
@@ -67,6 +68,7 @@ private fun getAppBarTitle(currentDestinationRoute: String?): Int {
         LoginDestination.route -> R.string.login_destination_title
         SignUpDestination.route -> R.string.signup_destination_title
         HomeDestination.route -> R.string.home_destination_title
+        PostDetailDestination.route->R.string.post_detail_destination_title
         else -> R.string.no_destination_title
     }
 }
