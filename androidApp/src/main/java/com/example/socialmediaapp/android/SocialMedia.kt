@@ -10,11 +10,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.socialmediaapp.android.common.AppBar
+import com.example.socialmediaapp.android.common.components.AppBar
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.generated.NavGraphs
-import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
+import com.ramcosta.composedestinations.generated.destinations.HomeDestination
+
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 
 
@@ -52,7 +53,7 @@ fun SocialApp(
     LaunchedEffect(key1 = token, block = {
         if (token != null && token.isEmpty()){
             navHostController.navigate(LoginDestination.route){
-                popUpTo(HomeScreenDestination.route){
+                popUpTo(HomeDestination.route){
                     inclusive = true
                 }
             }

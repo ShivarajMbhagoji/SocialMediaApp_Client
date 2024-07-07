@@ -1,4 +1,4 @@
-package com.example.socialmediaapp.android.common
+package com.example.socialmediaapp.android.common.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.StringRes

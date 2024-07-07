@@ -3,7 +3,7 @@ package com.example.socialmediaapp.android.auth.signup
 import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
-import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
+import com.ramcosta.composedestinations.generated.destinations.HomeDestination
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 import com.ramcosta.composedestinations.generated.destinations.SignUpDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -28,7 +28,7 @@ fun SignUp(
             }
         },
         onNavigateToHome = {
-                           navigator.navigate(HomeScreenDestination){
+                           navigator.navigate(HomeDestination){
                                popUpTo(SignUpDestination.invoke()){
                                    inclusive=true
                                }

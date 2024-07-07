@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
-import com.example.socialmediaapp.android.common.CustomTextField
+import com.example.socialmediaapp.android.common.components.CustomTextField
 import com.example.socialmediaapp.android.common.theme.SmallSpacing
 
 @Composable
