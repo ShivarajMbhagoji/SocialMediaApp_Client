@@ -15,6 +15,8 @@ import androidx.navigation.NavHostController
 import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.theme.SmallElevation
 import com.ramcosta.composedestinations.generated.destinations.EditProfileDestination
+import com.ramcosta.composedestinations.generated.destinations.FollowersDestination
+import com.ramcosta.composedestinations.generated.destinations.FollowingDestination
 import com.ramcosta.composedestinations.generated.destinations.HomeDestination
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 import com.ramcosta.composedestinations.generated.destinations.PostDetailDestination
@@ -73,6 +75,8 @@ private fun getAppBarTitle(currentDestinationRoute: String?): Int {
         PostDetailDestination.route->R.string.post_detail_destination_title
         ProfileDestination.route->R.string.profile_destination_title
         EditProfileDestination.route->R.string.edit_profile_destination_title
+        FollowersDestination.route->R.string.followers_text
+        FollowingDestination.route->R.string.following_text
         else -> R.string.no_destination_title
     }
 }

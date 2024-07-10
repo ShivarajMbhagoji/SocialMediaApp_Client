@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.example.socialmediaapp.android.MainActivityViewModel
 import com.example.socialmediaapp.android.account.edit.EditProfileViewModel
+import com.example.socialmediaapp.android.account.follows.FollowsViewModel
 import com.example.socialmediaapp.android.account.profile.ProfileViewModel
 import com.example.socialmediaapp.android.auth.login.LoginViewModel
 import com.example.socialmediaapp.android.auth.signup.SignUpViewModel
@@ -23,6 +24,7 @@ val appModule= module {
     viewModel { PostDetailViewModel() }
     viewModel { ProfileViewModel() }
     viewModel { EditProfileViewModel() }
+    viewModel { FollowsViewModel() }
 
 
 

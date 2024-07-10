@@ -3,6 +3,7 @@ package com.example.socialmediaapp.android.common.fake_data
 data class FollowsUser(
     val id: Int,
     val name: String,
+    val bio: String = "Hey there, welcome to my social app page!",
     val profileUrl: String,
     val isFollowing: Boolean = false
 )

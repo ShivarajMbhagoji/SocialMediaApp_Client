@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.generated.destinations.EditProfileDestination
+import com.ramcosta.composedestinations.generated.destinations.FollowersDestination
+import com.ramcosta.composedestinations.generated.destinations.FollowingDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.koinViewModel
 
@@ -20,8 +22,8 @@ fun Profile(
         userInfoUiState = viewModel.userInfoUiState,
         postsUiState = viewModel.profilePostsUiState,
         onButtonClick = { navigator.navigate(EditProfileDestination(userId))},
-        onFollowersClick = { },
-        onFollowingClick = { },
+        onFollowersClick = { navigator.navigate(FollowersDestination(userId))},
+        onFollowingClick = { navigator.navigate(FollowingDestination(userId))},
         onPostClick = {},
         onLikeClick = {},
         onCommentClick = {},
