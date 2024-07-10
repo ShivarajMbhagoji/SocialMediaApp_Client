@@ -17,6 +17,7 @@ import com.example.socialmediaapp.android.common.theme.SmallElevation
 import com.ramcosta.composedestinations.generated.destinations.HomeDestination
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 import com.ramcosta.composedestinations.generated.destinations.PostDetailDestination
+import com.ramcosta.composedestinations.generated.destinations.ProfileDestination
 import com.ramcosta.composedestinations.generated.destinations.SignUpDestination
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
@@ -69,6 +70,7 @@ private fun getAppBarTitle(currentDestinationRoute: String?): Int {
         SignUpDestination.route -> R.string.signup_destination_title
         HomeDestination.route -> R.string.home_destination_title
         PostDetailDestination.route->R.string.post_detail_destination_title
+        ProfileDestination.route->R.string.profile_destination_title
         else -> R.string.no_destination_title
     }
 }

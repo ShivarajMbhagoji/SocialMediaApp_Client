@@ -4,6 +4,7 @@ package com.example.socialmediaapp.android.di
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.example.socialmediaapp.android.MainActivityViewModel
+import com.example.socialmediaapp.android.account.profile.ProfileViewModel
 import com.example.socialmediaapp.android.auth.login.LoginViewModel
 import com.example.socialmediaapp.android.auth.signup.SignUpViewModel
 import com.example.socialmediaapp.android.common.datastore.UserSettingsSerializer
@@ -19,6 +20,7 @@ val appModule= module {
     viewModel { MainActivityViewModel(get()) }
     viewModel { HomeScreenViewModel() }
     viewModel { PostDetailViewModel() }
+    viewModel { ProfileViewModel() }
 
 
 
