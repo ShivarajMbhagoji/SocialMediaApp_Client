@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.theme.SmallElevation
+import com.ramcosta.composedestinations.generated.destinations.EditProfileDestination
 import com.ramcosta.composedestinations.generated.destinations.HomeDestination
 import com.ramcosta.composedestinations.generated.destinations.LoginDestination
 import com.ramcosta.composedestinations.generated.destinations.PostDetailDestination
@@ -71,10 +72,15 @@ private fun getAppBarTitle(currentDestinationRoute: String?): Int {
         HomeDestination.route -> R.string.home_destination_title
         PostDetailDestination.route->R.string.post_detail_destination_title
         ProfileDestination.route->R.string.profile_destination_title
+        EditProfileDestination.route->R.string.edit_profile_destination_title
         else -> R.string.no_destination_title
     }
 }
 
 private fun shouldShowNavigationIcon(currentDestinationRoute: String?): Boolean {
-    return false
+    return !(currentDestinationRoute == LoginDestination.route
+            || currentDestinationRoute == SignUpDestination.route
+            || currentDestinationRoute == HomeDestination.route
+            || currentDestinationRoute == null
+            )
 }

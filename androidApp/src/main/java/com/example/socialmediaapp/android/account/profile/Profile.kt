@@ -3,6 +3,7 @@ package com.example.socialmediaapp.android.account.profile
 import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.EditProfileDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,7 +19,7 @@ fun Profile(
     ProfileScreen(
         userInfoUiState = viewModel.userInfoUiState,
         postsUiState = viewModel.profilePostsUiState,
-        onButtonClick = { },
+        onButtonClick = { navigator.navigate(EditProfileDestination(userId))},
         onFollowersClick = { },
         onFollowingClick = { },
         onPostClick = {},
