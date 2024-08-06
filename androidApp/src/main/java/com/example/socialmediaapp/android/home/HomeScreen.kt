@@ -37,11 +37,11 @@ fun HomeScreen(
     onCommentClick: () -> Unit,
     onFollowButtonClick: (Boolean, FollowsUser) -> Unit,
     onBoardingFinish: () -> Unit,
-    fetchData: () -> Unit
+    refreshData: () -> Unit
 ) {
     val pullRefreshState = rememberPullRefreshState(
         refreshing = onBoardingUiState.isLoading && postsUiState.isLoading,
-        onRefresh = { fetchData() }
+        onRefresh = { refreshData() }
     )
 
     Box(
@@ -104,7 +104,7 @@ private fun HomeScreenPreview() {
                 onProfileClick = {},
                 onLikeClick = {},
                 onCommentClick = {},
-                fetchData = {},
+                refreshData = {},
                 onBoardingFinish = {}
             )
         }

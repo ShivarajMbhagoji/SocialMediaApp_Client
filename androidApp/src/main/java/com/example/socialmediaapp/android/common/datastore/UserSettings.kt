@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserSettings(
-    val id: Int = 0,
+    val id: Long = 0,
     val name: String = "",
     val bio: String = "",
     val avatar: String? = null,

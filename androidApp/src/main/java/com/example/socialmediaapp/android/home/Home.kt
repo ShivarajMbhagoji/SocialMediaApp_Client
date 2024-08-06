@@ -24,7 +24,7 @@ fun Home(
         onCommentClick = { /*TODO*/ },
         onFollowButtonClick = {_,_ ->},
         onBoardingFinish = { /*TODO*/ },
-        fetchData = {
+        refreshData = {
             viewModel.fetchData()
         }
     )
