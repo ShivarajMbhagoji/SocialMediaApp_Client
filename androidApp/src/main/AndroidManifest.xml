@@ -8,7 +8,7 @@
         android:name=".SocialApplication"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Splash">
         <activity
             android:name=".MainActivity"
             android:exported="true">
