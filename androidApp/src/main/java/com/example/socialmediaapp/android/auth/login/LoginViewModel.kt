@@ -3,19 +3,15 @@ package com.example.socialmediaapp.android.auth.login
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.socialmediaapp.android.common.datastore.UserSettings
-import com.example.socialmediaapp.android.common.datastore.toUserSettings
 import com.example.socialmediaapp.auth.domain.usecases.SignInUseCase
 import kotlinx.coroutines.launch
 import com.example.socialmediaapp.common.util.Result
 
 
 class LoginViewModel(
-    private val signInUseCase: SignInUseCase,
-    private val dataStore:DataStore<UserSettings>
+    private val signInUseCase: SignInUseCase
 ): ViewModel() {
     var uiState by mutableStateOf(LoginUiState())
         private set
@@ -34,9 +30,7 @@ class LoginViewModel(
                     )
                 }
                 is Result.Success -> {
-                    dataStore.updateData {
-                        authResultData.data!!.toUserSettings()
-                    }
+
                     uiState.copy(
                         isAuthenticating = false,
                         authenticationSucceed = true

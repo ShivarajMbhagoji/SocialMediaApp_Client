@@ -39,6 +39,8 @@ kotlin {
             api("io.ktor:ktor-serialization-kotlinx-json:2.3.11")
 
             api("io.insert-koin:koin-core:3.4.1")
+
+            implementation("androidx.datastore:datastore-preferences-core:1.1.1")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -47,10 +49,14 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
             api("io.insert-koin:koin-android:3.4.1")
+
+            api("androidx.datastore:datastore-preferences:1.1.1")
+
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
         }
     }
 }

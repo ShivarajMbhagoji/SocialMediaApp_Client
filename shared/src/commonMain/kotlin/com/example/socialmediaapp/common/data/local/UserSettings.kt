@@ -1,4 +1,4 @@
-package com.example.socialmediaapp.android.common.datastore
+package com.example.socialmediaapp.common.data.local
 
 import com.example.socialmediaapp.auth.domain.model.AuthResultData
 import kotlinx.serialization.Serializable
@@ -19,7 +19,7 @@ fun UserSettings.toAuthResultData():AuthResultData{
     return AuthResultData(id,name,bio,avatar,token,followersCount,followingCount)
 }
 
-fun AuthResultData.toUserSettings(): UserSettings{
+fun AuthResultData.toUserSettings(): UserSettings {
     return UserSettings(
         id, name, bio, avatar, token, followersCount, followingCount
     )

@@ -3,8 +3,7 @@ package com.example.socialmediaapp.android
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.socialmediaapp.android.common.datastore.UserSettings
-import com.example.socialmediaapp.android.common.datastore.toAuthResultData
+import com.example.socialmediaapp.common.data.local.UserSettings
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

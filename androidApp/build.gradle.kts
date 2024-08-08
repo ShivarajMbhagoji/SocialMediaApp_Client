@@ -70,7 +70,6 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 

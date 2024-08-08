@@ -11,7 +11,7 @@ import com.example.socialmediaapp.provideDispatcher
 import org.koin.dsl.module
 
 private val authModule = module {
-    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get(),get()) }
     factory { AuthService() }
     factory { SignUpUseCase() }
     factory { SignInUseCase() }
@@ -21,5 +21,5 @@ private val utilityModule = module {
     factory { provideDispatcher() }
 }
 
-fun getSharedModules() = listOf(authModule, utilityModule)
+fun getSharedModules() = listOf(platformModule,authModule, utilityModule)
 
