@@ -41,9 +41,12 @@ kotlin {
             api("io.insert-koin:koin-core:3.4.1")
 
             implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+
         }
 
         androidMain.dependencies {
