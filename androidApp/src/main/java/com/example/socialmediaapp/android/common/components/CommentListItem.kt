@@ -23,8 +23,8 @@ import com.dipumba.ytsocialapp.android.common.theming.DarkGray
 import com.dipumba.ytsocialapp.android.common.theming.LightGray
 import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
-import com.example.socialmediaapp.android.common.fake_data.Comment
-import com.example.socialmediaapp.android.common.fake_data.sampleComments
+import com.example.socialmediaapp.android.common.dummy_data.Comment
+import com.example.socialmediaapp.android.common.dummy_data.sampleComments
 import com.example.socialmediaapp.android.common.theme.LargeSpacing
 import com.example.socialmediaapp.android.common.theme.MediumSpacing
 
@@ -43,7 +43,7 @@ fun CommentListItem(
     ) {
         CircleImage(
             modifier = modifier.size(30.dp),
-            imageUrl  = comment.authorImageUrl,
+            url  = comment.authorImageUrl,
             onClick = { onProfileClick(comment.authorId) }
         )
 

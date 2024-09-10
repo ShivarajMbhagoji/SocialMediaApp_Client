@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -39,9 +40,7 @@ import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.components.CircleImage
 import com.example.socialmediaapp.android.common.components.FollowsButton
 import com.example.socialmediaapp.android.common.components.PostListItem
-import com.example.socialmediaapp.android.common.fake_data.Post
-import com.example.socialmediaapp.android.common.fake_data.samplePosts
-import com.example.socialmediaapp.android.common.fake_data.sampleProfiles
+import com.example.socialmediaapp.android.common.dummy_data.SamplePost
 import com.example.socialmediaapp.android.common.theme.LargeSpacing
 import com.example.socialmediaapp.android.common.theme.MediumSpacing
 import com.example.socialmediaapp.android.common.theme.SmallSpacing
@@ -50,29 +49,25 @@ import com.example.socialmediaapp.android.common.theme.SmallSpacing
 fun ProfileScreen(
     modifier: Modifier = Modifier,
     userInfoUiState: UserInfoUiState,
-    postsUiState: ProfilePostsUiState,
+    profilePostsUiState: ProfilePostsUiState,
     onButtonClick: () -> Unit,
     onFollowersClick: () -> Unit,
     onFollowingClick: () -> Unit,
-    onPostClick: (Post) -> Unit,
-    onLikeClick: () -> Unit,
-    onCommentClick: () -> Unit,
+    onPostClick: (SamplePost) -> Unit,
+    onLikeClick: (String) -> Unit,
+    onCommentClick: (String) -> Unit,
     fetchData: () -> Unit
 ) {
-    if (userInfoUiState.isLoading && postsUiState.isLoading) {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
+
+    if (userInfoUiState.isLoading && profilePostsUiState.isLoading){
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center){
             CircularProgressIndicator()
         }
-
-    } else {
+    }else{
         LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-        ) {
-            item(key = "header") {
+            modifier = modifier.fillMaxSize()
+        ){
+            item(key = "header_section"){
                 ProfileHeaderSection(
                     imageUrl = userInfoUiState.profile?.profileUrl ?: "",
                     name = userInfoUiState.profile?.name ?: "",
@@ -86,25 +81,25 @@ fun ProfileScreen(
             }
 
             items(
-                items = postsUiState.posts,
-                key = { post -> post.id }
-            ) {
+                items = profilePostsUiState.posts,
+                key = {post -> post.id}
+            ){
                 PostListItem(
-                    post = it,
-                    onPostClick = onPostClick,
+                    post = it.toDomainPost(),
+                    onPostClick = {},
                     onProfileClick = {},
-                    onLikeClick = onLikeClick,
-                    onCommentClick = onCommentClick
+                    onLikeClick = {},
+                    onCommentClick = {}
                 )
             }
         }
     }
 
-    LaunchedEffect(key1 = Unit) {
+    LaunchedEffect(key1 = Unit){
         fetchData()
     }
-}
 
+}
 
 @Composable
 fun ProfileHeaderSection(
@@ -127,11 +122,10 @@ fun ProfileHeaderSection(
             .background(color = MaterialTheme.colors.surface)
             .padding(all = LargeSpacing)
     ) {
-        CircleImage(
-            modifier = modifier.size(90.dp),
-            imageUrl = imageUrl,
-            onClick = {}
-        )
+
+
+        CircleImage(modifier = modifier.size(90.dp), url = imageUrl, onClick = {})
+
         Spacer(modifier = modifier.height(SmallSpacing))
 
         Text(
@@ -141,28 +135,25 @@ fun ProfileHeaderSection(
             overflow = TextOverflow.Ellipsis
         )
 
-        Text(
-            text = bio,
-            style = MaterialTheme.typography.body2
-        )
+        Text(text = bio, style = MaterialTheme.typography.body2)
 
         Spacer(modifier = modifier.height(MediumSpacing))
 
         Row(
-            modifier = modifier
-                .fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             Row(
                 modifier = modifier.weight(1f)
             ) {
+
                 FollowsText(
                     count = followersCount,
                     text = R.string.followers_text,
-                    onClick = onFollowersClick,
-                    modifier = modifier.padding(end = MediumSpacing)
+                    onClick = onFollowersClick
                 )
+
+                Spacer(modifier = modifier.width(MediumSpacing))
 
                 FollowsText(
                     count = followingCount,
@@ -181,16 +172,19 @@ fun ProfileHeaderSection(
             )
         }
     }
+
+
 }
 
 
 @Composable
-private fun FollowsText(
+fun FollowsText(
     modifier: Modifier = Modifier,
     count: Int,
     @StringRes text: Int,
     onClick: () -> Unit
 ) {
+
     Text(
         text = buildAnnotatedString {
             withStyle(
@@ -199,8 +193,8 @@ private fun FollowsText(
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp
                 )
-            ) {
-                append(text = "$count")
+            ){
+                append(text = "$count ")
             }
 
             withStyle(
@@ -209,39 +203,13 @@ private fun FollowsText(
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp
                 )
-            ) {
+            ){
                 append(text = stringResource(id = text))
             }
         },
         modifier = modifier.clickable { onClick() }
     )
-}
 
-
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Composable
-private fun ProfileScreenPreview() {
-    MyApplicationTheme {
-        Surface(color = MaterialTheme.colors.background) {
-            ProfileScreen(
-                userInfoUiState = UserInfoUiState(
-                    isLoading = false,
-                    profile = sampleProfiles.first()
-                ),
-                postsUiState = ProfilePostsUiState(
-                    isLoading = false,
-                    posts = samplePosts
-                ),
-                onFollowersClick = {},
-                onFollowingClick = {},
-                onButtonClick = {},
-                fetchData = {},
-                onCommentClick = {},
-                onLikeClick = {},
-                onPostClick = {}
-            )
-        }
-    }
 }
 
 

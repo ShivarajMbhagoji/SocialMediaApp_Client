@@ -20,8 +20,8 @@ fun Profile(
 
     ProfileScreen(
         userInfoUiState = viewModel.userInfoUiState,
-        postsUiState = viewModel.profilePostsUiState,
-        onButtonClick = { navigator.navigate(EditProfileDestination(userId))},
+        profilePostsUiState = viewModel.profilePostsUiState,
+        onButtonClick = { navigator.navigate(EditProfileDestination(userId)) },
         onFollowersClick = { navigator.navigate(FollowersDestination(userId))},
         onFollowingClick = { navigator.navigate(FollowingDestination(userId))},
         onPostClick = {},

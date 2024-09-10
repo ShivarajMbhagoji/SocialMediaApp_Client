@@ -30,7 +30,6 @@ class LoginViewModel(
                     )
                 }
                 is Result.Success -> {
-
                     uiState.copy(
                         isAuthenticating = false,
                         authenticationSucceed = true

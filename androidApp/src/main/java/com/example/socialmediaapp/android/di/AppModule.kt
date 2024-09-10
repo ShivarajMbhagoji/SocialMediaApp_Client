@@ -12,17 +12,13 @@ import com.example.socialmediaapp.android.post.PostDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val appModule= module {
-    viewModel { SignUpViewModel(get())}
+val appModule = module {
     viewModel { LoginViewModel(get()) }
-    viewModel { MainActivityViewModel(get()) }
-    viewModel { HomeScreenViewModel() }
-    viewModel { PostDetailViewModel() }
+    viewModel { SignUpViewModel(get()) }
+    viewModel { MainActivityViewModel(get())}
+    viewModel { HomeScreenViewModel(get(), get(), get(), get())}
+    viewModel { PostDetailViewModel()}
     viewModel { ProfileViewModel() }
     viewModel { EditProfileViewModel() }
     viewModel { FollowsViewModel() }
-
-
-
-
 }

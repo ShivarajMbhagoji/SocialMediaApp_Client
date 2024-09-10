@@ -40,7 +40,7 @@ fun FollowsListItem(
         verticalAlignment = Alignment.CenterVertically
     ){
 
-        CircleImage(modifier = modifier.size(40.dp), imageUrl = imageUrl, onClick = {})
+        CircleImage(modifier = modifier.size(40.dp), url= imageUrl, onClick = {})
 
         Column {
 

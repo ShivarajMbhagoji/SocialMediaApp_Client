@@ -26,8 +26,9 @@ import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
 import com.example.socialmediaapp.android.common.components.CommentListItem
 import com.example.socialmediaapp.android.common.components.PostListItem
-import com.example.socialmediaapp.android.common.fake_data.sampleComments
-import com.example.socialmediaapp.android.common.fake_data.samplePosts
+import com.example.socialmediaapp.android.common.dummy_data.sampleComments
+import com.example.socialmediaapp.android.common.dummy_data.samplePosts
+
 import com.example.socialmediaapp.android.common.theme.LargeSpacing
 
 @Composable
@@ -52,7 +53,7 @@ fun PostDetailScreen(
         ) {
             item(key = "post") {
                 PostListItem(
-                    post = postUiState.post,
+                    post = postUiState.post.toDomainPost(),
                     onPostClick = {},
                     onProfileClick = {},
                     onLikeClick = {},

@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -23,19 +23,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
-import com.example.socialmediaapp.android.common.fake_data.FollowsUser
-import com.example.socialmediaapp.android.common.fake_data.sampleUsers
+import com.example.socialmediaapp.android.common.dummy_data.sampleUsers
+
 import com.example.socialmediaapp.android.common.theme.LargeSpacing
 import com.example.socialmediaapp.android.common.theme.MediumSpacing
+import com.example.socialmediaapp.common.model.FollowsUser
 
 @Composable
 fun OnBoardingSection(
-    modifier: Modifier = Modifier,
     users: List<FollowsUser>,
     onUserClick: (FollowsUser) -> Unit,
     onFollowButtonClick: (Boolean, FollowsUser) -> Unit,
-    onBoardingFinish: () -> Unit
-){
+    onBoardingFinish: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
@@ -49,7 +50,7 @@ fun OnBoardingSection(
         )
 
         Text(
-            text = stringResource(id = R.string.onboarding_guidance_subtitle),
+            text = stringResource(id = R.string.oboarding_guidance_subtitle),
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = LargeSpacing),
@@ -57,7 +58,7 @@ fun OnBoardingSection(
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = modifier.heightIn(LargeSpacing))
+        Spacer(modifier = modifier.height(LargeSpacing))
 
         UsersRow(
             users = users,
@@ -67,11 +68,11 @@ fun OnBoardingSection(
 
         OutlinedButton(
             onClick = onBoardingFinish,
+            shape = RoundedCornerShape(percent = 50),
             modifier = modifier
                 .fillMaxWidth(fraction = 0.5f)
                 .align(Alignment.CenterHorizontally)
-                .padding(vertical = LargeSpacing),
-            shape = RoundedCornerShape(percent = 50)
+                .padding(vertical = LargeSpacing)
         ) {
             Text(text = stringResource(id = R.string.onboarding_button_text))
         }
@@ -79,7 +80,7 @@ fun OnBoardingSection(
 }
 
 @Composable
-fun UsersRow(
+private fun UsersRow(
     modifier: Modifier = Modifier,
     users: List<FollowsUser>,
     onUserClick: (FollowsUser) -> Unit,
@@ -89,8 +90,8 @@ fun UsersRow(
         horizontalArrangement = Arrangement.spacedBy(LargeSpacing),
         contentPadding = PaddingValues(horizontal = LargeSpacing),
         modifier = modifier
-    ){
-        items(items = users, key = {followUser -> followUser.id}){
+    ) {
+        items(items = users, key = { user -> user.id }) {
             OnBoardingUserItem(
                 followsUser = it,
                 onUserClick = onUserClick,
@@ -107,7 +108,7 @@ private fun OnBoardingSectionPreview() {
     MyApplicationTheme {
         Surface(color = MaterialTheme.colors.background) {
             OnBoardingSection(
-                users = sampleUsers,
+                users = sampleUsers.map { it.toFollowsUser() },
                 onUserClick = {},
                 onFollowButtonClick = { _, _ -> },
                 onBoardingFinish = {}
@@ -122,7 +123,7 @@ private fun UsersRowPreview() {
     MyApplicationTheme {
         Surface(color = MaterialTheme.colors.background) {
             UsersRow(
-                users = sampleUsers,
+                users = sampleUsers.map { it.toFollowsUser() },
                 onUserClick = {},
                 onFollowButtonClick = { _, _ -> },
                 modifier = Modifier.padding(vertical = LargeSpacing)

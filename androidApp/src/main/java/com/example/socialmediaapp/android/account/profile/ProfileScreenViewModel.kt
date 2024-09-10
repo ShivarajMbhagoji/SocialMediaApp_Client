@@ -5,21 +5,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.socialmediaapp.android.common.fake_data.Post
+import com.example.socialmediaapp.android.common.dummy_data.SamplePost
+import com.example.socialmediaapp.android.common.dummy_data.samplePosts
 import com.example.socialmediaapp.android.common.fake_data.Profile
-import com.example.socialmediaapp.android.common.fake_data.samplePosts
+
 import com.example.socialmediaapp.android.common.fake_data.sampleProfiles
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ProfileViewModel : ViewModel() {
+
+class ProfileViewModel : ViewModel(){
+
     var userInfoUiState by mutableStateOf(UserInfoUiState())
         private set
 
     var profilePostsUiState by mutableStateOf(ProfilePostsUiState())
         private set
 
-    fun fetchProfile(userId: Int) {
+
+    fun fetchProfile(userId: Int){
         viewModelScope.launch {
             delay(1000)
 
@@ -36,15 +40,14 @@ class ProfileViewModel : ViewModel() {
     }
 }
 
-
 data class UserInfoUiState(
     val isLoading: Boolean = true,
     val profile: Profile? = null,
-    val errorMessage: String? = null
+    var errorMessage: String? = null
 )
 
 data class ProfilePostsUiState(
     val isLoading: Boolean = true,
-    val posts: List<Post> = listOf(),
-    val errorMessage: String? = null
+    val posts: List<SamplePost> = listOf(),
+    var errorMessage: String? = null
 )

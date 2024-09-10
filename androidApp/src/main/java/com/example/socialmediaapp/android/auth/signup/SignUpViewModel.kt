@@ -16,7 +16,6 @@ class SignUpViewModel(
     var uiState by mutableStateOf(SignUpUiState())
         private set
 
-
     fun signUp(){
         viewModelScope.launch {
             uiState = uiState.copy(isAuthenticating = true)
@@ -31,7 +30,6 @@ class SignUpViewModel(
                     )
                 }
                 is Result.Success -> {
-
                     uiState.copy(
                         isAuthenticating = false,
                         authenticationSucceed = true
@@ -40,7 +38,6 @@ class SignUpViewModel(
             }
         }
     }
-
 
     fun updateUsername(input: String){
         uiState = uiState.copy(username = input)
