@@ -1,3 +1,7 @@
+buildscript {
+    val agp_version by extra("8.2")
+}
+
 plugins {
     //trick: for the same plugin versions in all sub-modules
     alias(libs.plugins.androidApplication).apply(false)

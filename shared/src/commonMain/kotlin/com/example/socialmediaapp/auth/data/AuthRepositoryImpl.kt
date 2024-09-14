@@ -5,32 +5,30 @@ import com.example.socialmediaapp.auth.domain.repository.AuthRepository
 import com.example.socialmediaapp.common.data.local.UserPreferences
 import com.example.socialmediaapp.common.data.local.toUserSettings
 import com.example.socialmediaapp.common.util.DispatcherProvider
-import kotlinx.coroutines.withContext
 import com.example.socialmediaapp.common.util.Result
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 
-internal class AuthRepositoryImpl (
-    private val dispatcherProvider: DispatcherProvider,
+internal class AuthRepositoryImpl(
+    private val dispatcher: DispatcherProvider,
     private val authService: AuthService,
     private val userPreferences: UserPreferences
-): AuthRepository{
+) : AuthRepository {
     override suspend fun signUp(
         name: String,
         email: String,
         password: String
     ): Result<AuthResultData> {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher.io){
             try {
                 val request = SignUpRequest(name, email, password)
 
                 val authResponse = authService.signUp(request)
 
-                if (authResponse.data == null) {
+                if (authResponse.data == null){
                     Result.Error(
                         message = authResponse.errorMessage!!
                     )
-                } else {
+                }else{
                     userPreferences.setUserData(
                         authResponse.data.toAuthResultData().toUserSettings()
                     )
@@ -38,7 +36,7 @@ internal class AuthRepositoryImpl (
                         data = authResponse.data.toAuthResultData()
                     )
                 }
-            } catch (e: Exception) {
+            }catch (e: Exception){
                 Result.Error(
                     message = "Oops, we could not send your request, try later!"
                 )
@@ -47,7 +45,7 @@ internal class AuthRepositoryImpl (
     }
 
     override suspend fun signIn(email: String, password: String): Result<AuthResultData> {
-        return withContext(Dispatchers.IO){
+        return withContext(dispatcher.io){
             try {
                 val request = SignInRequest(email, password)
 

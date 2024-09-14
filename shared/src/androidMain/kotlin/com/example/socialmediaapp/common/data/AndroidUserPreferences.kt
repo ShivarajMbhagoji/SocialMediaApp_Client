@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.first
 
 internal class AndroidUserPreferences(
     private val dataStore: DataStore<UserSettings>
-): UserPreferences {
+): UserPreferences{
     override suspend fun getUserData(): UserSettings {
         return dataStore.data.first()
     }
