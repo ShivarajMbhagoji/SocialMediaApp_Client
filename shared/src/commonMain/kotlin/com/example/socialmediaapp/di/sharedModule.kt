@@ -1,6 +1,10 @@
 package com.example.socialmediaapp.di
 
 
+import com.example.socialmediaapp.account.data.AccountApiService
+import com.example.socialmediaapp.account.data.repository.ProfileRepositoryImpl
+import com.example.socialmediaapp.account.domain.repository.ProfileRepository
+import com.example.socialmediaapp.account.domain.usecases.GetProfileUseCase
 import com.example.socialmediaapp.auth.data.AuthRepositoryImpl
 import com.example.socialmediaapp.auth.data.AuthService
 import com.example.socialmediaapp.auth.domain.repository.AuthRepository
@@ -15,7 +19,8 @@ import com.example.socialmediaapp.follow.domain.usecase.GetFollowableUsersUseCas
 import com.example.socialmediaapp.post.data.PostRepositoryImpl
 import com.example.socialmediaapp.post.domain.PostRepository
 import com.example.socialmediaapp.post.domain.usecase.GetPostsUseCase
-import com.example.socialmediaapp.post.domain.usecase.LikeOrUnlikePostUseCase
+import com.example.socialmediaapp.post.domain.usecase.GetUserPostsUseCase
+import com.example.socialmediaapp.post.domain.usecase.LikeOrDislikePostUseCase
 import com.example.socialmediaapp.provideDispatcher
 
 import org.koin.dsl.module
@@ -34,8 +39,8 @@ private val utilityModule = module {
 private val postModule = module {
     factory { PostApiService() }
     factory { GetPostsUseCase() }
-    factory { LikeOrUnlikePostUseCase() }
-
+    factory { LikeOrDislikePostUseCase() }
+    factory { GetUserPostsUseCase() }
     single<PostRepository> { PostRepositoryImpl(get(), get(), get()) }
 }
 
@@ -45,6 +50,12 @@ private val followsModule = module {
     factory { FollowOrUnfollowUseCase() }
 
     single<FollowsRepository> { FollowsRepositoryImpl(get(), get(), get()) }
+}
+
+private val accountModule = module {
+    factory { AccountApiService() }
+    factory { GetProfileUseCase() }
+    single<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get()) }
 }
 
 fun getSharedModules() = listOf(

@@ -8,23 +8,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.socialmediaapp.android.common.util.Constants
 import com.example.socialmediaapp.android.common.util.DefaultPagingManager
+import com.example.socialmediaapp.android.common.util.Event
+import com.example.socialmediaapp.android.common.util.EventBus
 import com.example.socialmediaapp.android.common.util.PagingManager
 import com.example.socialmediaapp.common.model.FollowsUser
 import com.example.socialmediaapp.common.model.Post
 import com.example.socialmediaapp.follow.domain.usecase.FollowOrUnfollowUseCase
 import com.example.socialmediaapp.follow.domain.usecase.GetFollowableUsersUseCase
 import com.example.socialmediaapp.post.domain.usecase.GetPostsUseCase
-import com.example.socialmediaapp.post.domain.usecase.LikeOrUnlikePostUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.example.socialmediaapp.common.util.Result
+import com.example.socialmediaapp.post.domain.usecase.LikeOrDislikePostUseCase
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class HomeScreenViewModel(
     private val getFollowableUsersUseCase: GetFollowableUsersUseCase,
     private val followOrUnfollowUseCase: FollowOrUnfollowUseCase,
     private val getPostsUseCase: GetPostsUseCase,
-    private val likePostUseCase: LikeOrUnlikePostUseCase
+    private val likePostUseCase: LikeOrDislikePostUseCase
 ): ViewModel() {
 
     var onBoardingUiState by mutableStateOf(OnBoardingUiState())
@@ -41,6 +45,13 @@ class HomeScreenViewModel(
 
     init {
         fetchData()
+
+        EventBus.events
+            .onEach {
+                when (it) {
+                    is Event.PostUpdated -> updatePost(it.post)
+                }
+            }.launchIn(viewModelScope)
     }
 
 
@@ -63,7 +74,7 @@ class HomeScreenViewModel(
         }
     }
 
-    private fun createPagingManager(): PagingManager<Post> {
+    private fun createPagingManager(): PagingManager<Post>{
         return DefaultPagingManager(
             onRequest = {page ->
                 getPostsUseCase(page, Constants.DEFAULT_REQUEST_PAGE_SIZE)
@@ -184,16 +195,20 @@ class HomeScreenViewModel(
 
             when (result) {
                 is Result.Error -> {
-                    postsFeedUiState = postsFeedUiState.copy(
-                        posts = postsFeedUiState.posts.map {
-                            if (it.postId == post.postId) post else it
-                        }
-                    )
+                    updatePost(post)
                 }
 
                 is Result.Success -> Unit
             }
         }
+    }
+
+    private fun updatePost(post: Post) {
+        postsFeedUiState = postsFeedUiState.copy(
+            posts = postsFeedUiState.posts.map {
+                if (it.postId == post.postId) post else it
+            }
+        )
     }
 
     fun onUiAction(uiAction: HomeUiAction) {

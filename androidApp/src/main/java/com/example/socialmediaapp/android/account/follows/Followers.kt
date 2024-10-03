@@ -11,7 +11,7 @@ import org.koin.androidx.compose.koinViewModel
 @Destination<RootGraph>
 fun Followers(
     navigator: DestinationsNavigator,
-    userId: Int
+    userId: Long
 ) {
     val viewModel: FollowsViewModel = koinViewModel()
 
