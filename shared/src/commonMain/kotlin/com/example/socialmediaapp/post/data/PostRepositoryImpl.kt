@@ -8,7 +8,7 @@ import com.example.socialmediaapp.common.data.remote.PostApiService
 import com.example.socialmediaapp.common.model.Post
 import com.example.socialmediaapp.common.util.Constants
 import com.example.socialmediaapp.common.util.DispatcherProvider
-import com.example.socialmediaapp.post.domain.PostRepository
+import com.example.socialmediaapp.post.domain.repository.PostRepository
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.withContext
 import com.example.socialmediaapp.common.util.Result
@@ -94,6 +94,31 @@ internal class PostRepositoryImpl(
                 Result.Error(message = Constants.NO_INTERNET_ERROR)
             } catch (exception: Throwable) {
                 Result.Error(message = "${exception.cause}")
+            }
+        }
+    }
+
+
+    override suspend fun getPost(postId: Long): Result<Post> {
+        return withContext(dispatcher.io){
+            try {
+                val userData = userPreferences.getUserData()
+
+                val apiResponse = postApiService.getPost(
+                    token = userData.token,
+                    currentUserId = userData.id,
+                    postId = postId
+                )
+
+                if (apiResponse.code == HttpStatusCode.OK){
+                    Result.Success(data = apiResponse.data.post!!.toDomainPost())
+                }else{
+                    Result.Error(message = apiResponse.data.message!!)
+                }
+            }catch (ioException: IOException){
+                Result.Error(message = Constants.NO_INTERNET_ERROR)
+            }catch (exception: Throwable){
+                Result.Error(message = Constants.UNEXPECTED_ERROR)
             }
         }
     }

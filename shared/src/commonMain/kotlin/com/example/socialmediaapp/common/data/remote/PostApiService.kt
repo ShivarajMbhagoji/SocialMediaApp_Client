@@ -3,6 +3,7 @@ package com.example.socialmediaapp.common.data.remote
 import com.example.socialmediaapp.common.data.KtorApi
 import com.example.socialmediaapp.common.data.model.LikeApiResponse
 import com.example.socialmediaapp.common.data.model.LikeParams
+import com.example.socialmediaapp.common.data.model.PostApiResponse
 import com.example.socialmediaapp.common.data.model.PostsApiResponse
 import com.example.socialmediaapp.common.util.Constants
 import io.ktor.client.call.body
@@ -68,5 +69,19 @@ internal class PostApiService : KtorApi() {
             setToken(token = token)
         }
         return PostsApiResponse(code = httpResponse.status, data = httpResponse.body())
+    }
+
+
+    suspend fun getPost(
+        token: String,
+        postId: Long,
+        currentUserId: Long
+    ): PostApiResponse {
+        val httpResponse = client.get {
+            endPoint(path = "/post/$postId")
+            parameter(key = Constants.CURRENT_USER_ID_PARAMETER, value = currentUserId)
+            setToken(token = token)
+        }
+        return PostApiResponse(code = httpResponse.status, data = httpResponse.body())
     }
 }

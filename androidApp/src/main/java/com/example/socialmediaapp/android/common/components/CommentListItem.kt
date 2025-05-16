@@ -23,17 +23,19 @@ import com.dipumba.ytsocialapp.android.common.theming.DarkGray
 import com.dipumba.ytsocialapp.android.common.theming.LightGray
 import com.example.socialmediaapp.android.MyApplicationTheme
 import com.example.socialmediaapp.android.R
-import com.example.socialmediaapp.android.common.dummy_data.Comment
-import com.example.socialmediaapp.android.common.dummy_data.sampleComments
 import com.example.socialmediaapp.android.common.theme.LargeSpacing
 import com.example.socialmediaapp.android.common.theme.MediumSpacing
+import com.example.socialmediaapp.android.common.util.toCurrentUrl
+import com.example.socialmediaapp.post.domain.model.PostComment
+import sampleComments
+
 
 @Composable
 fun CommentListItem(
     modifier: Modifier = Modifier,
-    comment: Comment,
-    onProfileClick: (Int) -> Unit,
-    onMoreIconClick: (Comment) -> Unit
+    comment: PostComment,
+    onProfileClick: (Long) -> Unit,
+    onMoreIconClick: (PostComment) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -43,8 +45,8 @@ fun CommentListItem(
     ) {
         CircleImage(
             modifier = modifier.size(30.dp),
-            url  = comment.authorImageUrl,
-            onClick = { onProfileClick(comment.authorId) }
+            url = comment.userImageUrl?.toCurrentUrl(),
+            onClick = { onProfileClick(comment.userId) }
         )
 
         Column(
@@ -57,22 +59,20 @@ fun CommentListItem(
                 )
             ) {
                 Text(
-                    text = comment.authorName,
+                    text = comment.userName,
                     style = MaterialTheme.typography.subtitle2,
                     modifier = modifier.alignByBaseline()
                 )
 
                 Text(
-                    text = comment.date,
+                    text = comment.createdAt,
                     style = MaterialTheme.typography.caption.copy(fontSize = 11.sp),
                     color = if (MaterialTheme.colors.isLight) {
                         LightGray
                     } else {
                         DarkGray
                     },
-                    modifier = modifier
-                        .alignByBaseline()
-                        .weight(1f)
+                    modifier = modifier.alignByBaseline().weight(1f)
                 )
                 Icon(
                     painter = painterResource(id = R.drawable.round_more_horizontal),
@@ -87,7 +87,7 @@ fun CommentListItem(
             }
 
             Text(
-                text = comment.comment,
+                text = comment.content,
                 style = MaterialTheme.typography.body2
             )
         }
@@ -100,7 +100,7 @@ fun CommentListItemPreview() {
     MyApplicationTheme {
         Surface(color = MaterialTheme.colors.surface) {
             CommentListItem(
-                comment = sampleComments.first(),
+                comment = sampleComments.first().toDomainComment(),
                 onProfileClick = {},
                 onMoreIconClick = {}
             )

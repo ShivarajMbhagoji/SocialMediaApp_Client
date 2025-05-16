@@ -13,7 +13,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 
-private const val BASE_URL = "http://192.168.79.64:8080/"
+private const val BASE_URL = "http://192.168.105.64:8080/"
 
 
 internal abstract class KtorApi{
@@ -22,7 +22,7 @@ internal abstract class KtorApi{
         install(ContentNegotiation){
             json(Json {
                 ignoreUnknownKeys = true
-                useAlternativeNames = false
+                useAlternativeNames = false 
             })
         }
     }
