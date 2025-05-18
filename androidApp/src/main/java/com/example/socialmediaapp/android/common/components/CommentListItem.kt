@@ -40,6 +40,7 @@ fun CommentListItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clickable{}
             .padding(all = LargeSpacing),
         horizontalArrangement = Arrangement.spacedBy(MediumSpacing)
     ) {

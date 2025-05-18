@@ -1,5 +1,6 @@
 package com.example.socialmediaapp.android.common.util
 
+import android.util.Log
 import kotlinx.coroutines.delay
 import com.example.socialmediaapp.common.util.Result
 
@@ -19,6 +20,7 @@ class DefaultPagingManager<Model>(
     private var isLoading = false
 
     override suspend fun loadItems() {
+        Log.d("PagingManager", "Loading page $currentPage")
         if (isLoading) return
         isLoading = true
         onLoadStateChange(true)
