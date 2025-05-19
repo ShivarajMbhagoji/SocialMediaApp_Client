@@ -8,6 +8,7 @@ import com.example.socialmediaapp.common.util.Constants
 import com.example.socialmediaapp.common.util.DispatcherProvider
 import com.example.socialmediaapp.follow.domain.FollowsRepository
 import com.example.socialmediaapp.common.util.Result
+import com.example.socialmediaapp.common.util.safeApiCall
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.withContext
@@ -72,6 +73,31 @@ internal class FollowsRepositoryImpl(
                 Result.Error(
                     message = "${exception.message}"
                 )
+            }
+        }
+    }
+
+    override suspend fun getFollows(
+        userId: Long,
+        page: Int,
+        pageSize: Int,
+        followsType: Int
+    ): Result<List<FollowsUser>> {
+        return safeApiCall(dispatcher){
+            val currentUserData = userPreferences.getUserData()
+            val apiResponse = followsApiService.getFollows(
+                userToken = currentUserData.token,
+                userId = userId,
+                page = page,
+                pageSize = pageSize,
+                followsEndPoint = if (followsType == 1) "followers" else "following"
+            )
+
+
+            if (apiResponse.code == HttpStatusCode.OK){
+                Result.Success(data = apiResponse.data.follows.map { it.toDomainFollowUser() })
+            }else{
+                Result.Error(message = "${apiResponse.data.message}")
             }
         }
     }

@@ -19,8 +19,8 @@ fun EditProfile(
         onNameChange = viewModel::onNameChange,
         bioTextFieldValue = viewModel.bioTextFieldValue,
         onBioChange = viewModel::onBioChange,
-        onUploadButtonClick = { viewModel.uploadProfile() },
         onUploadSucceed = { navigator.navigateUp() },
-        fetchProfile = { viewModel.fetchProfile(userId)}
+        userId = userId,
+        onUiAction = viewModel::onUiAction
     )
 }

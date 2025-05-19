@@ -1,6 +1,6 @@
 package com.example.socialmediaapp.android.common.util
 
-private const val CURRENT_BASE_URL = "http://192.168.105.64:8080/"
+private const val CURRENT_BASE_URL = "http://192.168.76.64:8080/"
 
 fun String.toCurrentUrl(): String {
     // Remove the fixed prefix (if present)

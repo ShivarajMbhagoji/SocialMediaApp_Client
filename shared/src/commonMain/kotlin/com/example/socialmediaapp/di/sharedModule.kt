@@ -5,6 +5,7 @@ import com.example.socialmediaapp.account.data.AccountApiService
 import com.example.socialmediaapp.account.data.repository.ProfileRepositoryImpl
 import com.example.socialmediaapp.account.domain.repository.ProfileRepository
 import com.example.socialmediaapp.account.domain.usecases.GetProfileUseCase
+import com.example.socialmediaapp.account.domain.usecases.UpdateProfileUseCase
 import com.example.socialmediaapp.auth.data.AuthRepositoryImpl
 import com.example.socialmediaapp.auth.data.AuthService
 import com.example.socialmediaapp.auth.domain.repository.AuthRepository
@@ -16,6 +17,7 @@ import com.example.socialmediaapp.follow.data.FollowsRepositoryImpl
 import com.example.socialmediaapp.follow.domain.FollowsRepository
 import com.example.socialmediaapp.follow.domain.usecase.FollowOrUnfollowUseCase
 import com.example.socialmediaapp.follow.domain.usecase.GetFollowableUsersUseCase
+import com.example.socialmediaapp.follow.domain.usecase.GetFollowsUseCase
 import com.example.socialmediaapp.post.data.PostRepositoryImpl
 import com.example.socialmediaapp.post.data.remote.PostCommentsApiService
 import com.example.socialmediaapp.post.data.repository.PostCommentsRepositoryImpl
@@ -56,6 +58,7 @@ private val followsModule = module {
     factory { FollowsApiService() }
     factory { GetFollowableUsersUseCase() }
     factory { FollowOrUnfollowUseCase() }
+    factory { GetFollowsUseCase() }
 
     single<FollowsRepository> { FollowsRepositoryImpl(get(), get(), get()) }
 }
@@ -63,6 +66,7 @@ private val followsModule = module {
 private val accountModule = module {
     factory { AccountApiService() }
     factory { GetProfileUseCase() }
+    factory { UpdateProfileUseCase() }
     single<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get()) }
 }
 

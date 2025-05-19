@@ -9,4 +9,5 @@ object Constants {
     const val DEFAULT_REQUEST_COMMENTS_PAGE_SIZE = 3
     const val COMMENTS_HEADER_KEY = "COMMENTS_HEADER_KEY"
     const val POST_ITEM_KEY = "POST_ITEM_KEY"
+    const val READING_IMAGE_BYTES_FAILURE_MESSAGE = "Failed to read image bytes"
 }
